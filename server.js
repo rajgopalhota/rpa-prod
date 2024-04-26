@@ -11,10 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://raja:2003@cluster0.a5zryul.mongodb.net/hope-club", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://raja:2003@cluster0.a5zryul.mongodb.net/hope-club",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 // Check if the connection is successful
 const db = mongoose.connection;
