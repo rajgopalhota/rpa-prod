@@ -41,10 +41,27 @@ app.use("/pay", payRoutes);
 
 // Route to handle Vercel error
 app.get("/_vercel_error", (req, res) => {
+  // Send a response to the client instructing it to reload the page
+  res.status(500).send(`
+    <html>
+      <head>
+        <script>
+          setTimeout(() => {
+            window.location.reload();
+          }, 3000); // Reload the page after 3 seconds
+        </script>
+      </head>
+      <body>
+        <p>Server crashed. Reloading...</p>
+      </body>
+    </html>
+  `);
+
   // Restart your server or reload necessary components here
   console.log("Server crashed. Reloading...");
   process.exit(1); // This will cause Vercel to restart the server
 });
+
 // Serve the React app for any other routes
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist/index.html"));
