@@ -1,19 +1,5 @@
 {
   "version": 2,
   "builds": [{ "src": "server.js", "use": "@vercel/node" }],
-  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "server.js" }],
-  "rewrites": [
-    {
-      "source": "/_vercel_error",
-      "destination": "/_vercel_error"
-    }
-  ],
-  "error": {
-    "rewrites": [
-      {
-        "source": "/_vercel_error",
-        "destination": "/_vercel_error"
-      }
-    ]
-  }
+  "routes": [{ "handle": "filesystem" }, { "src": "/.*", "dest": "server.js" }]
 }

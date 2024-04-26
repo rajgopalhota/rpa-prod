@@ -39,8 +39,9 @@ app.use("/api/messages", messagesRoute);
 app.use("/hope", activityRoutes);
 app.use("/pay", payRoutes);
 
-// Route to handle Vercel error
-app.get("/_vercel_error", (req, res) => {
+// Route to handle server errors and trigger automatic reload
+app.use((err, req, res, next) => {
+  console.error("Server error:", err);
   // Send a response to the client instructing it to reload the page
   res.status(500).send(`
     <html>
@@ -56,10 +57,6 @@ app.get("/_vercel_error", (req, res) => {
       </body>
     </html>
   `);
-
-  // Restart your server or reload necessary components here
-  console.log("Server crashed. Reloading...");
-  process.exit(1); // This will cause Vercel to restart the server
 });
 
 // Serve the React app for any other routes
@@ -68,6 +65,6 @@ app.get("*", (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
