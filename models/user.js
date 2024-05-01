@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema({
   department: String,
   role: { type: String, default: "DefaultUser" },
   createdAt: { type: Date, default: Date.now },
-  registeredActivities: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Activity' }],
+  registeredActivities: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Activity" },
+  ],
 });
 
 const UserModel = mongoose.model("User", userSchema);

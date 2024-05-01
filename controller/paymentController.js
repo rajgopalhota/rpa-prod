@@ -92,11 +92,10 @@ router.get("/history", authMiddleware, async (req, res) => {
     const userPayments = await PaymentTransaction.find({ user: req.user._id })
       .populate({
         path: "activities",
-        select: "name date price",
+        select: "name date venue price",
       })
       .populate("paymentVerifiedBy", "name email _id")
       .exec();
-
     res.json(userPayments);
   } catch (error) {
     res.status(500).json({ message: error.message });

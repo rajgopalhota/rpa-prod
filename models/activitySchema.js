@@ -4,6 +4,7 @@ const activitySchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
+  venue: { type: String, required: true },
   price: { type: Number, required: true },
   date: { type: Date, required: true },
   createdBy: { type: String, required: true }, // Created user name
