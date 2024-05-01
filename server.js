@@ -12,7 +12,7 @@ app.use(express.json());
 
 // MongoDB connection
 mongoose.connect(
-  "mongodb+srv://raja:2003@cluster0.a5zryul.mongodb.net/hope-club",
+  "mongodb+srv://raja:2003@cluster0.a5zryul.mongodb.net/rpa-club",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
