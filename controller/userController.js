@@ -162,4 +162,30 @@ router.put("/update-role/:id", authMiddleware, async (req, res) => {
   }
 });
 
+// Route for updating user role (admin only)
+router.put("/update-role/:userId", authMiddleware, async (req, res) => {
+  try {
+    if (req.user.role !== "Admin") {
+      return res.status(403).json({ message: "Permission denied" });
+    }
+    const userId = req.params.userId;
+    if (!userId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    user.role = req.body.role;
+    await user.save();
+
+    res.json({ message: "User role updated successfully" });
+    
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 module.exports = router;
